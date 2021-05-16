@@ -13,12 +13,17 @@ export default function Home() {
     setInterval(() => {
         let date = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
         let newDate = date.split('-').reverse().join('-')
-        const res = axios.get(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=125102&date=${newDate}`);
-        if (res.data === undefined) {
-            console.log("Seat Not Available");
-        } else {
-            sendmails();
-        }
+        axios.get(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=125102&date=${newDate}`)
+            .then((res) => {
+                console.log();
+                if (Object.keys(res.data.sessions).length <= 0) {
+                    console.log("Seat Not Available");
+                } else {
+                    sendmails();
+                }
+            });
+
+
     }, 300000);
 
     function sendmails() {
