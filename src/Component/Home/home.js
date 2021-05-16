@@ -17,13 +17,11 @@ export default function Home() {
             .then((res) => {
                 console.log();
                 if (Object.keys(res.data.sessions).length <= 0) {
-                    console.log("Seat Not Available");
+                    console.log("Seat Not Available bro");
                 } else {
                     sendmails();
                 }
             });
-
-
     }, 300000);
 
     function sendmails() {
